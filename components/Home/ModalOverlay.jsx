@@ -46,15 +46,6 @@ const ModalStyled = styled.div`
     padding: 12px;
     text-align: center;
   }
-
-  span {
-    padding: 12px;
-    display: block;
-    color: #444;
-    text-align: center;
-    font-size: 12px;
-    max-width: 300px;
-  }
 `;
 
 const PinFormStyled = styled.div`
@@ -65,7 +56,11 @@ const PinFormStyled = styled.div`
   align-items: center;
 
   span {
+    display: block;
     font-size: 16px;
+    max-width: 300px;
+    text-align: center;
+    padding: 12px;
   }
 
   button {

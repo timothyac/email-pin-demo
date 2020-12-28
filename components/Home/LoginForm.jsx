@@ -6,6 +6,15 @@ const LoginFormStyled = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  span {
+    display: block;
+    padding: 12px;
+    color: #444;
+    text-align: center;
+    font-size: 12px;
+    max-width: 300px;
+  }
 `;
 
 const SpacerStyled = styled.div.attrs((props) => ({
