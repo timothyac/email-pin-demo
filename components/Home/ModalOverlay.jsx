@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import validateEmail from "../../utils/validateEmail";
 import LoginForm from "./LoginForm";
+import PinSet from "./PinSet";
 
 const ModalOverlayContainerStyled = styled.div`
   width: 100%;
@@ -56,7 +57,16 @@ const ModalStyled = styled.div`
   }
 `;
 
+const PinFormStyled = styled.div`
+  height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export default function ModalOverlay() {
+  const [userIsVerified, setuserIsVerified] = useState(false);
   const [inputs, setInputs] = useState({
     email: "",
     firstName: "",
@@ -74,6 +84,7 @@ export default function ModalOverlay() {
       if (parsed.verified) {
         // Update UI
         console.log("verified");
+        setuserIsVerified(true);
       }
     }
   };
@@ -83,11 +94,18 @@ export default function ModalOverlay() {
       <div className="modal-blur" />
       <div className="form-container">
         <ModalStyled>
-          <LoginForm
-            checkIfUserExists={checkIfUserExists}
-            inputs={inputs}
-            setInputs={setInputs}
-          />
+          {!userIsVerified ? (
+            <PinFormStyled>
+              <h3>Confirm Pin</h3>
+              <PinSet />
+            </PinFormStyled>
+          ) : (
+            <LoginForm
+              checkIfUserExists={checkIfUserExists}
+              inputs={inputs}
+              setInputs={setInputs}
+            />
+          )}
         </ModalStyled>
       </div>
     </ModalOverlayContainerStyled>
