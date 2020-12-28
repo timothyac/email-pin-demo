@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   html, body {
+    background-color: #f0f2f5;
         width: 100%;
         min-height: 100vh;
         font-size: 18px;
@@ -11,8 +12,9 @@ const GlobalStyle = createGlobalStyle`
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         @media only screen and (max-width: 600px) {
           font-size: 16px;
-        }
-      }
+    }
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -28,8 +30,9 @@ const GlobalStyle = createGlobalStyle`
     
 `;
 
-const ContainerStyled = styled.div`
+const ContainerStyled = styled.main`
   margin: auto;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
