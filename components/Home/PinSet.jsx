@@ -75,6 +75,7 @@ export default function PinSet(props) {
         maxLength="1"
         id="pin-num-1"
         value={pin["pin-num-1"]}
+        placeholder="0"
         onChange={(e) => goToNextPin(e, pinRefs.pin2)}
         onKeyDown={(e) => goToPrevPin(e, null)}
       />
@@ -85,6 +86,7 @@ export default function PinSet(props) {
         maxLength="1"
         id="pin-num-2"
         value={pin["pin-num-2"]}
+        placeholder="0"
         onChange={(e) => goToNextPin(e, pinRefs.pin3)}
         onKeyDown={(e) => goToPrevPin(e, pinRefs.pin1)}
       />
@@ -95,6 +97,7 @@ export default function PinSet(props) {
         maxLength="1"
         id="pin-num-3"
         value={pin["pin-num-3"]}
+        placeholder="0"
         onChange={(e) => goToNextPin(e, pinRefs.pin4)}
         onKeyDown={(e) => goToPrevPin(e, pinRefs.pin2)}
       />
@@ -105,6 +108,7 @@ export default function PinSet(props) {
         maxLength="1"
         id="pin-num-4"
         value={pin["pin-num-4"]}
+        placeholder="0"
         onChange={(e) => goToNextPin(e, pinRefs.pin5)}
         onKeyDown={(e) => goToPrevPin(e, pinRefs.pin3)}
       />
@@ -115,6 +119,7 @@ export default function PinSet(props) {
         maxLength="1"
         id="pin-num-5"
         value={pin["pin-num-5"]}
+        placeholder="0"
         onChange={(e) => goToNextPin(e, pinRefs.pin6)}
         onKeyDown={(e) => goToPrevPin(e, pinRefs.pin4)}
       />
@@ -125,6 +130,7 @@ export default function PinSet(props) {
         maxLength="1"
         id="pin-num-6"
         value={pin["pin-num-6"]}
+        placeholder="0"
         onChange={(e) => goToNextPin(e, null)}
         onKeyDown={(e) => goToPrevPin(e, pinRefs.pin5)}
       />
