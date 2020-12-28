@@ -1,4 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
+
+import validateEmail from "../../utils/validateEmail";
 
 const ModalOverlayContainerStyled = styled.div`
   width: 100%;
@@ -115,22 +118,61 @@ const ButtonContainerStyled = styled.div`
 `;
 
 export default function ModalOverlay() {
+  const [inputs, setInputs] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+  });
+
+  // When a user unfocuses, send a request to the backend
+  // that checks if they are an existing user. If they
+  // are, then we can display the login prompt
+  const checkIfUserExists = async () => {
+    if (validateEmail(inputs.email)) {
+      const res = await fetch("/api/checkIfUser");
+      const parsed = await res.json();
+
+      if (parsed.verified) {
+        // Update UI
+        console.log("verified");
+      }
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(inputs);
+  };
+
   return (
     <ModalOverlayContainerStyled>
       <div className="modal-blur" />
       <div className="form-container">
         <ModalStyled>
-          <form>
+          <form onSubmit={handleSubmit}>
             <h3>email-pin-demo</h3>
             <SpacerStyled />
             <InputContainerStyled>
-              <input type="email" placeholder="email" />
+              <input
+                onBlur={checkIfUserExists}
+                type="email"
+                placeholder="email"
+                id="email"
+                value={inputs.email}
+                onChange={(e) =>
+                  setInputs((prev) => ({
+                    ...prev,
+                    [e.target.id]: e.target.value,
+                  }))
+                }
+              />
             </InputContainerStyled>
             <SpacerStyled />
             <InputContainerStyled flex>
-              <input type="text" placeholder="first name" />
+              <input type="text" placeholder="first name" id="firstName" />
               <SpacerStyled horizontal />
-              <input type="text" placeholder="last name" />
+              <input type="text" placeholder="last name" id="lastName" />
             </InputContainerStyled>
             <SpacerStyled />
             <span>
@@ -138,7 +180,7 @@ export default function ModalOverlay() {
               Policy.
             </span>
             <ButtonContainerStyled>
-              <button>Login</button>
+              <button type="submit">Login</button>
             </ButtonContainerStyled>
           </form>
         </ModalStyled>
