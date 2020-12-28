@@ -46,7 +46,9 @@ export default function PinSet(props) {
       nextRef.current.focus();
     } else {
       // Display loader and check if pin is valid
-      console.log("end of the line!");
+      props.setCheckingPin(true);
+
+      // TODO: create new api route
     }
   };
 

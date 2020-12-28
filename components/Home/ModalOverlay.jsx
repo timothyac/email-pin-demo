@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import validateEmail from "../../utils/validateEmail";
 import LoginForm from "./LoginForm";
-import PinSet from "./PinSet";
+import PinForm from "./PinForm";
 
 const ModalOverlayContainerStyled = styled.div`
   width: 100%;
@@ -48,38 +48,8 @@ const ModalStyled = styled.div`
   }
 `;
 
-const PinFormStyled = styled.div`
-  height: 276px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  span {
-    display: block;
-    font-size: 16px;
-    max-width: 300px;
-    text-align: center;
-    padding: 12px;
-  }
-
-  button {
-    border: none;
-    font-size: 16px;
-    background-color: #fff;
-    color: #2085d8;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  .green {
-    color: #33df5e;
-  }
-`;
-
 export default function ModalOverlay() {
   const [userIsVerified, setuserIsVerified] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
   const [inputs, setInputs] = useState({
     email: "",
     firstName: "",
@@ -101,10 +71,6 @@ export default function ModalOverlay() {
     }
   };
 
-  const resendEmail = () => {
-    // Call API to resend email
-  };
-
   return (
     <ModalOverlayContainerStyled>
       <div className="modal-blur" />
@@ -112,22 +78,7 @@ export default function ModalOverlay() {
         <ModalStyled>
           {/* // TODO: invert this back */}
           {!userIsVerified ? (
-            <PinFormStyled>
-              <h3>Confirm Pin</h3>
-              <PinSet />
-              <span>
-                This is the first time you are authorizing this device, so we
-                have sent a confirmation email to <b>{inputs.email}</b>
-              </span>
-              {emailSent ? (
-                <span className="green">New email Sent!</span>
-              ) : (
-                <span>
-                  Didn’t get it?{" "}
-                  <button onClick={resendEmail}>Resend email</button>
-                </span>
-              )}
-            </PinFormStyled>
+            <PinForm inputs={inputs} />
           ) : (
             <LoginForm
               checkIfUserExists={checkIfUserExists}
