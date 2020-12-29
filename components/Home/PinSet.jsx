@@ -35,7 +35,7 @@ export default function PinSet(props) {
     "pin-num-6": "",
   });
 
-  const goToNextPin = (e, nextRef) => {
+  const goToNextPin = async (e, nextRef) => {
     setPin((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
@@ -48,7 +48,19 @@ export default function PinSet(props) {
       // Display loader and check if pin is valid
       props.setCheckingPin(true);
 
-      // TODO: create new api route
+      try {
+        const res = await fetch("/api/validatePin");
+        const parsed = await res.json();
+
+        if (parsed.verified) {
+          // Update UI
+          props.setCheckingPin(false);
+        } else {
+          // TODO: Let user know the pin was wrong
+        }
+      } catch (error) {
+        alert(error);
+      }
     }
   };
 

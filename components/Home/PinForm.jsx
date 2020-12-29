@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import PinSet from "./PinSet";
+import Spinner from "./Spinner";
 
 const PinFormStyled = styled.div`
   height: 276px;
@@ -45,11 +46,7 @@ export default function PinForm(props) {
   return (
     <PinFormStyled>
       <h3>Confirm Pin</h3>
-      {checkingPin ? (
-        <span>loading...</span>
-      ) : (
-        <PinSet setCheckingPin={setCheckingPin} />
-      )}
+      {checkingPin ? <Spinner /> : <PinSet setCheckingPin={setCheckingPin} />}
       <span>
         This is the first time you are authorizing this device, so we have sent
         a confirmation email to <b>{inputs.email}</b>

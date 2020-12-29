@@ -61,12 +61,16 @@ export default function ModalOverlay() {
   // are, then we can display the login prompt
   const checkIfUserExists = async () => {
     if (validateEmail(inputs.email)) {
-      const res = await fetch("/api/checkIfUser");
-      const parsed = await res.json();
+      try {
+        const res = await fetch("/api/checkIfUser");
+        const parsed = await res.json();
 
-      if (parsed.verified) {
-        // Update UI
-        setuserIsVerified(true);
+        if (parsed.verified) {
+          // Update UI
+          setuserIsVerified(true);
+        }
+      } catch (error) {
+        alert(error);
       }
     }
   };
@@ -76,8 +80,7 @@ export default function ModalOverlay() {
       <div className="modal-blur" />
       <div className="form-container">
         <ModalStyled>
-          {/* // TODO: invert this back */}
-          {!userIsVerified ? (
+          {userIsVerified ? (
             <PinForm inputs={inputs} />
           ) : (
             <LoginForm
